@@ -1,5 +1,5 @@
 var app = require("express")();
-var mineflayer = require("mineflayer")();
+var mineflayer = require("mineflayer");
 var tmi = require("tmi.js");
 var clients = [];
 
