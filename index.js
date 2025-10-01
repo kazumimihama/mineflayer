@@ -18,6 +18,8 @@ app.get("/", function(request, response) {
   
 });
 
+app.listen(3000);
+
 const client = new tmi.Client({
 	channels: [ 'akatsukidhotaru', 'murakamisuigun' ]
 });
