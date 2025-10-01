@@ -25,10 +25,10 @@ const client = new tmi.Client({
 client.connect();
 
 client.on('message', (channel, tags, message, self) => {
-  if (!message.includes(":")) {
-	  try {
-      clients[Math.floor(Math.random() * clients.length)].chat(message);
-    }
-    catch {}
+	if (!message.includes(":")) {
+		try {
+    		clients[Math.floor(Math.random() * clients.length)].chat(message);
+    	}
+    	catch {}
     }
 });
