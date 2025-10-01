@@ -1,25 +1,34 @@
-var a = require("express")();
-var b = require("mineflayer")();
-var c = [];
+var app = require("express")();
+var mineflayer = require("mineflayer")();
+var tmi = require("tmi.js");
+var clients = [];
 
-a.get("/", function(request, response) {
+app.get("/", function(request, response) {
   
-  var d = b.createBot({
+  var bot = mineflayer.createBot({
     host: request.query.host,
     port: request.query.port,
     username: request.query.username,
     respawn: false
   });
 
-  d.once("spawn", function() {
-    c.push(d); 
+  bot.once("spawn", function() {
+    clients.push(bot); 
   });
   
 });
 
-a.get("/chat", function(request, response) {
-  try {
-    c[Math.floor(Math.random() * c.length)].chat(request.query.message);
-  }
-  catch {}
+const client = new tmi.Client({
+	channels: [ 'akatsukidhotaru', 'murakamisuigun' ]
+});
+
+client.connect();
+
+client.on('message', (channel, tags, message, self) => {
+  if (!message.includes(":")) {
+	  try {
+      clients[Math.floor(Math.random() * clients.length)].chat(message);
+    }
+    catch {}
+    }
 });
