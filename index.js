@@ -15,6 +15,8 @@ app.get("/", function(request, response) {
   bot.once("spawn", function() {
     clients.push(bot); 
   });
+
+  response.sendStatus(200);
   
 });
 
